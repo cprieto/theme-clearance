@@ -32,11 +32,11 @@ function fish_prompt
 
   # Display [venvname] if in a virtualenv
   if set -q VIRTUAL_ENV
-      echo -n -s (set_color -b cyan black) '[' (basename "$VIRTUAL_ENV") ']' $normal ' '
+      echo -n -s (set_color -b cyan black) '🐍 [' (basename "$VIRTUAL_ENV") ']' $normal ' '
   end
 
   # Print pwd or full path
-  echo -n -s $cwd $normal
+  echo -n -s 📁 $cwd $normal
 
   # Show git branch and status
   if [ (_git_branch_name) ]
