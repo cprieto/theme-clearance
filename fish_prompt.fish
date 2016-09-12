@@ -36,7 +36,7 @@ function fish_prompt
   end
 
   # Print pwd or full path
-  echo -n -s 📁 $cwd $normal
+  echo -n -s 📁  $cwd $normal
 
   # Show git branch and status
   if [ (_git_branch_name) ]
