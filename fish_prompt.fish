@@ -4,6 +4,7 @@
 # - Virtualenv name (if applicable, see https://github.com/adambrenecki/virtualfish)
 # - Current directory name
 # - Git branch and dirty state (if inside a git repo)
+# - If inside the GOPATH, it displays a nice GO prompt
 
 function _git_branch_name
   echo (command git symbolic-ref HEAD ^/dev/null | sed -e 's|^refs/heads/||')
@@ -32,17 +33,19 @@ function fish_prompt
 
   # Display [venvname] if in a virtualenv
   if set -q VIRTUAL_ENV
-      echo -n -s (set_color cyan) '[🐍  ' (basename "$VIRTUAL_ENV") ']' $normal
+    echo -n -s (set_color cyan) '[🐍  ' (basename "$VIRTUAL_ENV") ']' $normal
   end
 
   # Display [go] if in a GOPATH
   if set -q GOPATH
+    if test (string match -i -r "^$GOPATH" (pwd))
       echo -n -s (set_color cyan) '[  go!]' $normal
+      end
   end
 
   if set -q OCAML_TOPLEVEL_PATH
-      set -l opam_compiler (opam switch show)
-        echo -n -s (set_color cyan) '[🐫  ' $opam_compiler ']' $normal
+    set -l opam_compiler (opam switch show)
+    echo -n -s (set_color cyan) '[🐫  ' $opam_compiler ']' $normal
   end
 
   if set -q _KERL_ACTIVE_DIR
