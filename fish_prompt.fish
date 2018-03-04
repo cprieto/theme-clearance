@@ -44,7 +44,7 @@ function fish_prompt
   end
 
   if set -q OCAML_TOPLEVEL_PATH
-    if command -v opam
+    if command -v opam > /dev/null
       set -l opam_compiler (opam switch show)
       echo -n -s (set_color cyan) '[🐫  ' $opam_compiler ']' $normal
     end
